@@ -1,0 +1,49 @@
+﻿@model FarmCentralApp.Models.User
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>User LogIn</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Enter Username</label>
+                <input asp-for="UsersFirstname" class="form-control" />
+                <span asp-validation-for="UsersFirstname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Enter Password</label>
+                <input type="password" asp-for="UsersPassword" class="form-control" />
+                <span asp-validation-for="UsersPassword" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label class="control-label">Enter Role</label>
+                <select asp-for="UsersRole" class="form-control" asp-items="ViewBag.Role"></select>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+            <br />
+            @if (ViewBag.Message != null)
+            {
+                <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+                </script>
+
+            }
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

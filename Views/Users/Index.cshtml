@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FarmCentralApp.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr style=" Background: #ff7171;font: 20px, bold">
+            <th>
+                First Name
+            </th>
+            <th>
+                Surname
+            </th>
+            <th>
+                Role
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr style="background: #ffd4d4">
+            <td>
+                @Html.DisplayFor(modelItem => item.UsersFirstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsersSurname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsersRole)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.UsersId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

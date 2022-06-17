@@ -1,0 +1,99 @@
+﻿@model IEnumerable<FarmCentralApp.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<form asp-action="Index" method="get">
+
+
+    @if (ViewBag.deleteRemove == 0)
+    {
+    }
+    else
+    {
+        <div class="form-actions">
+            <select asp-items="ViewBag.listFarmer" value="@ViewData["CurrentFarmer"]" name="SearchFarmer" class="form-control-sm"></select>
+            <input name="ButtonFarmer" type="submit" value="Search for Farmer" class="btn btn-primary" style="margin-left : 175px" />
+            <br /> ========================================
+        </div>
+
+    }
+    <div class="form-actions">
+        <p>
+            <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input name="ButtonSearch" type="submit" value="Search for Product Type" class="btn btn-primary" style="margin-left : 100px" />
+            <br /> ========================================
+        </p>
+    </div>
+    <div class="form-actions">
+        <p>
+            <input type="date" name="SearchDate" value="@ViewData["CurrentDate"]" />
+            <input type="date" name="SearchDate1" value="@ViewData["CurrentDate1"]" />
+            <input name="ButtonDate" type="submit" value="Search for Date Range" class="btn btn-primary" />
+        </p>
+    </div>
+    <br />
+    <a asp-action="Index" style="font: bold">Back to Full List</a>
+    <br />
+    <div class="text-danger">
+        <strong>@ViewBag.MsgSelectedFarmer</strong>
+    </div>
+    <br />
+</form>
+<table class="table">
+    <thead>
+        <tr style=" Background: #ff7171;font: 20px, bold">
+            <th>
+                Product Type
+            </th>
+            <th>
+                Product Price (R)
+            </th>
+            <th>
+                Product Date
+            </th>
+            <th>
+                Farmer Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="background: #ffd4d4">
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductDaterange)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Users.UsersFirstname)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
+                    @if (ViewBag.deleteRemove == 0)
+                    {
+
+
+
+                    }
+                    else
+                    {
+
+                        <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
